@@ -1,5 +1,12 @@
 # 🚢 Ship Tracker (Sea Tracker)
 
+[![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
+[![React 18](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=000)](https://react.dev/)
+[![PostgreSQL + PostGIS](https://img.shields.io/badge/PostgreSQL-PostGIS-336791?logo=postgresql&logoColor=white)](https://postgis.net/)
+[![Git LFS](https://img.shields.io/badge/Git%20LFS-enabled-0A7?logo=git-lfs&logoColor=white)](https://git-lfs.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
+
 Enterprise-style, real-time maritime intelligence platform for tracking vessels, incidents, alerts, and ocean conditions.
 
 It combines multiple AIS feeds, geospatial analytics, operational alerting, and a modern map-centric UI into one monorepo.
@@ -14,6 +21,11 @@ It combines multiple AIS feeds, geospatial analytics, operational alerting, and 
 - **Production-ready backend design** with async FastAPI, Redis pub/sub, Celery workers, and PostGIS.
 
 ## Architecture at a Glance
+
+Canonical diagram source: `docs/architecture.mmd`  
+Exported image artifact: `docs/architecture.svg`
+
+![Ship Tracker architecture](docs/architecture.svg)
 
 ```mermaid
 flowchart LR
@@ -63,7 +75,7 @@ flowchart LR
 ## Tech Stack
 
 | Layer | Technologies |
-|---|---|
+| --- | --- |
 | Frontend | React 18, Vite, Leaflet, Recharts, Zustand, Tailwind CSS |
 | Backend | Python 3.11+, FastAPI, Uvicorn, Pydantic Settings |
 | Async/Data | SQLAlchemy Async, asyncpg, GeoAlchemy2, Shapely, PyProj |
@@ -112,31 +124,31 @@ Ship Tracker/
 
 1. **Install dependencies and bootstrap the workspace**
 
-	- Run `setup.bat`
+    - Run `setup.bat`
 
 2. **Create and prepare the database**
 
-	In `psql`:
+    In `psql`:
 
-	- `CREATE DATABASE seatracker;`
-	- `\c seatracker`
-	- `CREATE EXTENSION postgis;`
+    - `CREATE DATABASE seatracker;`
+    - `\c seatracker`
+    - `CREATE EXTENSION postgis;`
 
 3. **Configure environment**
 
-	- Copy `backend/.env.example` to `backend/.env`
-	- Fill in required values (at minimum database + redis + AIS key if used)
+    - Copy `backend/.env.example` to `backend/.env`
+    - Fill in required values (at minimum database + redis + AIS key if used)
 
 4. **Start services**
 
-	- `start.bat` (spawns backend, frontend, celery worker, celery beat)
-	- or `start_inline.bat` for single-terminal mode
+    - `start.bat` (spawns backend, frontend, celery worker, celery beat)
+    - or `start_inline.bat` for single-terminal mode
 
 5. **Open the app**
 
-	- Frontend: `http://localhost:5173`
-	- API: `http://localhost:8000`
-	- OpenAPI Docs: `http://localhost:8000/docs`
+    - Frontend: `http://localhost:5173`
+    - API: `http://localhost:8000`
+    - OpenAPI Docs: `http://localhost:8000/docs`
 
 ## Configuration
 
@@ -145,7 +157,7 @@ Primary runtime configuration is loaded from `backend/.env`.
 ### Core Variables
 
 | Variable | Purpose |
-|---|---|
+| --- | --- |
 | `DATABASE_URL` | Async SQLAlchemy connection string |
 | `DATABASE_SYNC_URL` | Sync DB URL for tools/scripts |
 | `REDIS_URL` | Redis broker/pubsub endpoint |
@@ -203,6 +215,14 @@ If you clone this repository for development, ensure Git LFS is installed before
 - `start.bat` launches four processes: FastAPI, Celery worker, Celery beat, and Vite.
 - `stop.bat` terminates tracked service windows/processes.
 - Celery uses `--pool=solo` for Windows compatibility.
+
+## Contributing
+
+See `CONTRIBUTING.md` for branch workflow, coding expectations, and PR checklist.
+
+## Release Checklist
+
+See `docs/release-checklist.md` for pre-release quality and operations gates.
 
 ## License
 
