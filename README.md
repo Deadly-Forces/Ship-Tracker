@@ -29,7 +29,7 @@ Exported image artifact: `docs/architecture.svg`
 
 ```mermaid
 flowchart LR
-    subgraph External Sources
+    subgraph external_sources["External Sources"]
         A[AISStream]
         B[Kystverket]
         C[NOAA AIS]
@@ -37,7 +37,7 @@ flowchart LR
         E[Open-Meteo / NOAA Tides]
     end
 
-    subgraph Backend (FastAPI)
+    subgraph backend["Backend (FastAPI)"]
         AGG[AIS Aggregator]
         VT[Vessel Tracker]
         AD[Alert / Incident / Collision / Zone Services]
@@ -45,13 +45,13 @@ flowchart LR
         CEL[Celery Worker + Beat]
     end
 
-    subgraph Data Layer
+    subgraph data_layer["Data Layer"]
         PG[(PostgreSQL + PostGIS)]
         R[(Redis)]
         GEO[GeoJSON Layers]
     end
 
-    subgraph Frontend (React + Vite)
+    subgraph frontend["Frontend (React + Vite)"]
         UI[Map + Ops + Analytics]
     end
 
