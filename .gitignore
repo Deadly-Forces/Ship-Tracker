@@ -11,7 +11,6 @@ venv/
 *.log
 *.db
 static/cables.geojson
-backend/static/eez_boundaries.geojson
 
 # Coverage
 .coverage
